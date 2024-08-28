@@ -27,9 +27,12 @@ pipeline {
 
     post {
         always {
-            slackSend channel: '#jenkins-notifications',
-                    color: 'good',
-                    message: "Pipeline finished: ${currentBuild.result}"
+            slackSend (
+                channel: '#jenkins-notifications',
+                color: 'good',
+                message: "Pipeline finished: ${currentBuild.result}",
+                tokenCredentialId: 'slack-bot-token'  // Use the new Slack token ID here
+            )
         }
     }
 }
